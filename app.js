@@ -12,7 +12,7 @@ app.use(express.urlencoded({extended: true}))
 mongoDb()
 
 app.get('/', (req, res) => {
-   res. redirect('/url-shortner')
+   res. redirect('/olly')
 })
 
 app.use(require('./routes/urlRoutes'))

@@ -1,8 +1,10 @@
 const Url = require('../models/urlModel')
 const shortId  = require('shortid')
 
-const get_home = (req, res) => {
+const get_home = async (req, res) => {
+
     res.render('index')
+
 }
 const post_url = async (req, res) => {
 
@@ -13,10 +15,11 @@ const post_url = async (req, res) => {
     // res.send({longUrl, shortUrl})
 
     try{
-        const newUrl = new Url({longUrl, shortUrl})
-        await newUrl.save()
-        const r = res.json(newUrl._id)
-        res.redirect('/')
+        const newUrl = new Url({longUrl, shortUrl, shortCode})
+        const shrinked = await newUrl.save()
+        // res.send(shrinked)
+
+        res.render('deets', {shrinked})
     } catch(err) {
         console.log(err)
     }
@@ -24,13 +27,34 @@ const post_url = async (req, res) => {
 
 }
 
-const get_singleUrl = async (req, res) => {
-    const id = req.params.id
+const reditolong = async (req, res) => {
+    const shortCode = req.params.shorturl
+
+    const getlong = await Url.findOne({shortCode })
+
+    if (!getlong) {
+        res.status(404).send("Url does not exist")
+    }
+
+    getlong.clicks ++
+    getlong.save()
+
+    res.redirect(getlong.longUrl)
+
+}
+
+// const get_singleUrl = async (req, res) => {
+//     const id = req.params.id
+
+//     const result = await findByID(id)
+//     res.render('deets', {result})
 
     
-}
+// }
 
 module.exports = {
     get_home,
-    post_url
+    post_url,
+    reditolong
+    
 }

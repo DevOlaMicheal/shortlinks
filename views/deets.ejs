@@ -5,8 +5,10 @@
 
     <%- include('./partials/nav.ejs') %>
 
-    <div class="conatiner">
-        <%+ singleurl.shortUrl %>
+    <div class="container">
+      <p class="lead"> <%= shrinked.longUrl %></p> 
+      <p class="lead"> <%= shrinked.shortUrl %></p> 
+      <p class="lead"> <%= shrinked.clicks %> </p>
     </div>
 
 <%- include('./partials/footer.ejs') %>

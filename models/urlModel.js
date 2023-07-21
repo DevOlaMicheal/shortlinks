@@ -5,6 +5,7 @@ const shortId = require('shortid')
 const UrlSchema = new Schema({
     longUrl: {type: String, required: true},
     shortUrl: {type: String, required: true},
+    shortCode: {type: String, required: true},
     clicks: {type: Number, required: true, default: 0}
 }, { timestamps: true })
 
