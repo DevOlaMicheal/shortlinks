@@ -3,7 +3,8 @@ const shortId  = require('shortid')
 
 const get_home = async (req, res) => {
 
-    res.render('index')
+    const shrinked = ""
+    res.render('index', {shrinked})
 
 }
 const post_url = async (req, res) => {
@@ -19,7 +20,7 @@ const post_url = async (req, res) => {
         const shrinked = await newUrl.save()
         // res.send(shrinked)
 
-        res.render('deets', {shrinked})
+        res.render('index', {shrinked})
     } catch(err) {
         console.log(err)
     }
@@ -41,6 +42,10 @@ const reditolong = async (req, res) => {
 
     res.redirect(getlong.longUrl)
 
+}
+
+const track_link = async (req, res) => {
+    res.render('track')
 }
 
 // const get_singleUrl = async (req, res) => {

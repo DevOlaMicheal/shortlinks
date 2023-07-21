@@ -1,21 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('./partials/head.ejs') %>
-<body>
+<body style="background-color: #eee;">
 
     <%- include('./partials/nav.ejs') %>
 
     <div class="container">
-        <form action="/olly/new-shrink" method="post">
-            <input type="text" class="form-control" name="longurl">
-            <button class="btn btn-success">shrink url</button>
-        </form>
+        <div class="row">
+            <div class="col-md-7 my-auto lead text-left">
+                <div class="">
+                    <h3 class="display-6">Your Links Dont have to Be long and Boring!</h3>
+                    <p class="lead">Make Your links short and readable in seconds</p>
+                    <div class="alert alert-success" role="alert">
+                        Your access id is <span class="fw-bold"><%= shrinked.shortCode %></span>, use code to track your link details
+                    </div>
+                </div>
+                <form action="/olly/new-shrink" method="post">
+                    <input type="text" class="form-control my-2" name="longurl" value="https://" placeholder="" style="height: 50px; border: 2px solid #13747d;">
+                    <button class="btn btn-success" style="background-color: #13747d;">shrink url</button>
+                </form>
+            </div>
 
-    
+            <div class="col-md-5">
+                <img src="/images/hero.png" alt="" class="img-fluid">
+            </div>
+        </div>
+        
+
         
     </div>
 
 <%- include('./partials/footer.ejs') %>
-      
 </body>
 </html>
