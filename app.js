@@ -15,6 +15,13 @@ app.get('/', (req, res) => {
    res. redirect('/olly')
 })
 
+app.get('/track', async (req, res) => {
+   res.render('track')
+})
+
 app.use(require('./routes/urlRoutes'))
 
+app.use((req, res) => {
+   res.status(404).render('404')
+})
 app.listen(port, () => console.log(`app listening on port ${port}!`))

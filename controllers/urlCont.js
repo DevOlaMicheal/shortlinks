@@ -11,15 +11,15 @@ const post_url = async (req, res) => {
 
 
     const shortCode = shortId.generate()
+    const uniqueId = shortId.generate()
     const shortUrl = `http://localhost:3000/${shortCode}`
     const longUrl = req.body.longurl
     // res.send({longUrl, shortUrl})
 
     try{
-        const newUrl = new Url({longUrl, shortUrl, shortCode})
+        const newUrl = new Url({longUrl, shortUrl, shortCode, uniqueId})
         const shrinked = await newUrl.save()
         // res.send(shrinked)
-
         res.render('index', {shrinked})
     } catch(err) {
         console.log(err)
@@ -28,25 +28,32 @@ const post_url = async (req, res) => {
 
 }
 
-const reditolong = async (req, res) => {
-    const shortCode = req.params.shorturl
+const check_unique = async (req, res) => {
+    const uniqueId = req.body.uinqueID
 
-    const getlong = await Url.findOne({shortCode })
-
-    if (!getlong) {
+    const getDetails = await Url.findOne({uniqueId})
+    if (!getDetails) {
         res.status(404).send("Url does not exist")
     }
 
-    getlong.clicks ++
-    getlong.save()
+    res.render('deets', {shrinked: getDetails})
+}
 
+const reditolong = async (req, res) => {
+    const shortCode = req.params.shorturl
+
+    const getlong = await Url.findOne({ shortCode })
+
+    if (getlong === null) {
+        res.status(404).send("Url does not exist")
+    }else{
+        getlong.clicks ++
+        getlong.save()
+    }
     res.redirect(getlong.longUrl)
 
 }
 
-const track_link = async (req, res) => {
-    res.render('track')
-}
 
 // const get_singleUrl = async (req, res) => {
 //     const id = req.params.id
@@ -60,6 +67,7 @@ const track_link = async (req, res) => {
 module.exports = {
     get_home,
     post_url,
-    reditolong
+    reditolong,
+    check_unique
     
 }

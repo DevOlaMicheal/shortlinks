@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+<body>
+
+    <%- include('./partials/nav.ejs') %>
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-6 my-auto lead justify-content-center">
+                <h3 class="fw-normal display-6">Track your Link on the Go!</h3>
+                <form action="/olly/details" method="post" class="my-4">
+                    <input type="text" class="mb-4 form-control display-6" placeholder="UNIQUE ID" name="uniqueId"  style="height: 60px; border-radius: 0;">
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button class="btn btn-lg text-white py-auto" type="submit" style="background-color: #13747d; border-radius: 0;">Check <i class="fa fa-arrow-right"></i> </button>
+                        </div>
+                </form>
+            </div>
+
+            <div class="col-md-6">
+                <img src="/images/track.png" alt="" class="img-fluid">
+            </div>
+        </div>
+        
+    </div>
+
+<%- include('./partials/footer.ejs') %>
+      
+</body>
+</html>
