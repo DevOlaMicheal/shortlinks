@@ -11,15 +11,28 @@
                 <div class="">
                     <h3 class="display-6">Your Links Dont have to Be long and Boring!</h3>
                     <p class="lead">Make Your links short and readable in seconds</p>
+                    <% if (shrinked) { %>
                     <div class="alert alert-success" role="alert">
-                        Your access id is <span class="fw-bold"><%= shrinked.uniqueId %></span>, use code to track your link details
+                        Your access id is <span class="fw-bold"><%= shrinked.uniqueId %></span>, use this code to track your link details
+
+                        <p>Click on <a href="/track" class="text-dark"> track your link </a></p>
                     </div>
+
+                    
+                    <% }else{ %>
+                        <div class="alert alert-success small" role="alert">
+                            Your link will be ready in just 3 steps
+                            
+                            <p>paste your super-long-link in the input bellow</p>
+                        </div>
+                        <form action="/olly/new-shrink" method="post">
+                            <input type="text" class="form-control my-2" name="longurl" placeholder="https://www.your-super-long-link.com" placeholder="" style="height: 50px; border: 2px solid #13747d;" required>
+                            <button class="btn btn-success" style="background-color: #13747d;">shrink url</button>
+                        </form>
+         
+                        <% } %>
                 </div>
-                <form action="/olly/new-shrink" method="post">
-                    <input type="text" class="form-control my-2" name="longurl" value="https://" placeholder="" style="height: 50px; border: 2px solid #13747d;">
-                    <button class="btn btn-success" style="background-color: #13747d;">shrink url</button>
-                </form>
-            </div>
+                          </div>
 
             <div class="col-md-5">
                 <img src="/images/hero.png" alt="" class="img-fluid">

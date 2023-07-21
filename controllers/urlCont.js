@@ -29,14 +29,30 @@ const post_url = async (req, res) => {
 }
 
 const check_unique = async (req, res) => {
-    const uniqueId = req.body.uinqueID
+
+    const uniqueId = req.body.uniqueId
 
     const getDetails = await Url.findOne({uniqueId})
-    if (!getDetails) {
-        res.status(404).send("Url does not exist")
+
+    // res.send(getDetails)
+
+    if (getDetails === null) {
+        res.status(404).render("404")
+    }else{
+        
+        res.redirect(`/olly/details/${getDetails.id}`)
+
     }
 
-    res.render('deets', {shrinked: getDetails})
+}
+
+const load_details = async(req, res) => {
+    const id = req.params.id
+    
+    const details = await Url.findById(id)
+
+    res.render('deets', {shrinked: details})
+
 }
 
 const reditolong = async (req, res) => {
@@ -68,6 +84,7 @@ module.exports = {
     get_home,
     post_url,
     reditolong,
-    check_unique
+    check_unique,
+    load_details
     
 }
