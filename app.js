@@ -24,4 +24,4 @@ app.use(require('./routes/urlRoutes'))
 app.use((req, res) => {
    res.status(404).render('404')
 })
-app.listen(port, () => console.log(`app listening on port ${port}!`))
+app.listen(process.env.PORT || port, () => console.log(`app listening on port 3`))
